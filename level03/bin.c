@@ -7,7 +7,7 @@ void    v()
     fgets(buf, 512, stdin);
     printf(buf);
 
-    if (*(char *)0x804988c != 64)
+    if (*(unsigned char *)0x0804988c != 64)
         return;
 
     fwrite("Wait what?!\n", 1, 12, stdout);
