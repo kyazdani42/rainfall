@@ -23,8 +23,6 @@ int	main(int ac, char **av)
 
 	FILE *password = fopen("/home/user/level8/.pass", "r");
 
-	// this should point to a location in the heap (like addr2[1])
-	// and then we should override the return value to move to the function m
 	fgets((char *)0x8049960, 68, password);
 
 	puts("~~");
