@@ -2,18 +2,38 @@
 
 int	main()
 {
-	/* ecx -> ds:0x8049ab0 <service> */
-	/* edx -> ds:0x8049aac <auth> */
-	printf("%p, %p \n", edx, ecx);
+	static char *auth = NULL;
+	static char *service = NULL;
 
-	fgets(addr of esp+0x20, 128, stdin);
-	if (something == something)
-		return 0;
-	/* ... */
+	while true {
+		printf("%p, %p \n", auth, service);
 
-	if (esi < edi)
-	{
-		malloc(4);
+		char buf[128] = NULL;
+		if (fgets(buf, 128, stdin))
+			return (0);
+
+		if (strncmp(buf, "auth ", 5))
+		{
+			auth = malloc(4);
+
+			if (strlen(buf) < 30)
+				strcpy(auth, &buf[5]);
+		}
+
+		if (strncmp(buf, "reset", 5))
+			free(auth);
+
+		if (strncmp(buf, "service", 6))
+			*service = strdup(&buf[7]);
+
+		if (strncmp(buf, "login", 5))
+		{
+			if (*(auth + 32))
+				system("/bin/sh");
+			else
+				fwrite("Password:\n", 1, 10, stdout);
+		}
 	}
 
+	return (0);
 }
