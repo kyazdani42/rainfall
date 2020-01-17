@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <strings.h>
+#include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-int	p(char *buf, char *str)
+void	p(char *buf, char *str)
 {
 	char read_buffer[4096];
 
@@ -13,20 +13,28 @@ int	p(char *buf, char *str)
 	strncpy(buf, read_buffer, 20);
 }
 
-int	pp(char *buf1)
+void	pp(char *buf)
 {
-	char buf2[48];
+	// i think buf1 must override buf2
+	// and write something on buf2
+	// as something is messing with the
+	// stack after that. We might be able
+	// to execute a shellcode by erasing the rip value.
+	char buf1[20];
+	char buf2[20];
 
+	p(buf1, " - ");
 	p(buf2, " - ");
-	p(&buf2[17], " - ");
-	strcpy(buf1, buf2);
-	strcat(buf1, &buf2[17]);
+	strcpy(buf, buf1);
+	// weird stuff happening here
+	strcat(buf, buf2);
 }
 
 int	main(int ac, char **av)
 {
 	char buf[42];
 
-	puts(pp(buf));
+	pp(buf);
+	puts(buf);
 	return (0);
 }
