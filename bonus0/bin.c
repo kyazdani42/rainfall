@@ -5,28 +5,25 @@
 
 void	p(char *buf, char *str)
 {
-	char read_buffer[4096];
+	char read_buffer[4104];
 
 	puts(str);
 	read(0, read_buffer, 4096);
-	strchr(read_buffer, '\n');
+	char *ret = strchr(read_buffer, '\n');
+	*ret = 0;
 	strncpy(buf, read_buffer, 20);
 }
 
 void	pp(char *buf)
 {
-	// i think buf1 must override buf2
-	// and write something on buf2
-	// as something is messing with the
-	// stack after that. We might be able
-	// to execute a shellcode by erasing the rip value.
-	char buf1[20];
 	char buf2[20];
+	char buf1[20];
 
 	p(buf1, " - ");
 	p(buf2, " - ");
 	strcpy(buf, buf1);
-	// weird stuff happening here
+	int len = strlen(buf);
+	buf[len] = ' ';
 	strcat(buf, buf2);
 }
 
