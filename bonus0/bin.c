@@ -23,7 +23,12 @@ void	pp(char *buf)
 	p(buf2, " - ");
 	strcpy(buf, buf1);
 	int len = strlen(buf);
+
+	//TODO: not sure about that , might want to disassemble better
+	// this does not really do that but almost.
+	// it moves the buf2 i byte to the left.
 	buf[len] = ' ';
+
 	strcat(buf, buf2);
 }
 
